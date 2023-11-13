@@ -1,0 +1,25 @@
+# Ignora archivos de respaldo y archivos temporales
+*~
+*.swp
+*.bak
+
+# Ignora archivos de compilación y ejecutables
+*.o
+*.out
+*.exe
+
+# Ignora archivos de configuración específicos del entorno
+config.ini
+
+# Ignora archivos generados por el sistema
+Thumbs.db
+.DS_Store
+
+# Ignora directorios específicos
+node_modules/
+build/
+dist/
+
+# Ignora archivos de registro y archivos de salida
+*.log
+*.txt
