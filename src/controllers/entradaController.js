@@ -7,11 +7,9 @@ const generarQR = async (req, res) => {
     const { eventoId } = req.body;
 
     if (req.usuario.role !== "normal") {
-      return res
-        .status(403)
-        .json({
-          error: "Acceso no autorizado. Se requiere un usuario normal.",
-        });
+      return res.status(403).json({
+        error: "Acceso no autorizado. Se requiere un usuario normal.",
+      });
     }
 
     const qrData = `Entrada para el Evento: ${eventoId}`;
@@ -24,8 +22,12 @@ const generarQR = async (req, res) => {
       EventoId: eventoId,
       usuarioId: req.usuario.id,
     });
+    const evento = await Evento.findOne({
+      where: { id: eventoId },
+      attributes: ['estado', 'nombre'],
+    });
 
-    res.status(201).json({ ...nuevaEntrada.toJSON() });
+    res.status(201).json({ ...nuevaEntrada.toJSON(), Evento: evento });
   } catch (error) {
     console.error("Error al generar el QR para la entrada:", error);
     res
@@ -39,11 +41,9 @@ const usarEntrada = async (req, res) => {
     const { qrCode } = req.body;
 
     if (req.usuario.role !== "admin") {
-      return res
-        .status(403)
-        .json({
-          error: "Acceso no autorizado. Se requiere un usuario administrador.",
-        });
+      return res.status(403).json({
+        error: "Acceso no autorizado. Se requiere un usuario administrador.",
+      });
     }
 
     const entrada = await Entrada.findOne({
