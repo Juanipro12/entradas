@@ -1,10 +1,12 @@
 import express from 'express';
-import { iniciarSesion, registrarUsuario } from '../controllers/userController';
+import { iniciarSesion, getUser } from '../controllers/userController.js';
+import { verificarToken } from '../utils/middleware.js';
 
 const userRoutes = express.Router();
 
 userRoutes.post('/login', iniciarSesion);
 
-userRoutes.post('/register', registrarUsuario);
+userRoutes.get('/get-user', verificarToken, getUser);
+
 
 export default userRoutes;

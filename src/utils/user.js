@@ -7,8 +7,7 @@ export const generarToken = (usuario) => {
       correo: usuario.correo,
       role: usuario.role,
     },
-    'key', 
-    { expiresIn: '1h' } 
+    'key'
   );
   return token;
 };
